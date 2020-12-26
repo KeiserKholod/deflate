@@ -2,6 +2,11 @@ import unittest
 from bitarray import bitarray
 from deflate.huffman import HuffmanCodec, Node
 from deflate.lz77 import LZ77Codec, Codeword
+import tempfile
+from deflate.handlers.compressor import Compressor
+from deflate.handlers.decompressor import Decompressor
+from pathlib import Path
+import os
 
 
 class TestHuffman(unittest.TestCase):
@@ -72,3 +77,36 @@ class TestLZ77(unittest.TestCase):
         lz77_codec = LZ77Codec(len(data))
         decoded = lz77_codec.decode(data)
         self.assertEqual(expected_data, decoded)
+
+
+class TestCompressor(unittest.TestCase):
+    def test_compressor_read_from_file(self):
+        compressor = Compressor()
+        with tempfile.NamedTemporaryFile(mode='w', delete=False) as file:
+            file.write('wewqtqrtertwerete')
+        file_name = file.name
+        data_from_file = compressor.read_from_file(file_name)
+        self.assertIsNotNone(data_from_file)
+
+    def test_compress_and_decompress_file(self):
+        compressor = Compressor()
+        decompressor = Decompressor()
+
+        with tempfile.NamedTemporaryFile(mode='w', delete=False) as file:
+            file.write('wewqtqrtertwerete')
+        file_name = file.name
+        archive_name = "qwerty"
+
+        data_from_file = compressor.read_from_file(file_name)
+
+        encoded_data = compressor.compress(data_from_file, file_name)[0]
+        compressor.write_archive("qwerty", encoded_data)
+        archive = Path.cwd() / (archive_name + '.dfa')
+
+        data_to_decode = decompressor.read_from_archive(archive_name + '.dfa')
+
+        file, decoded_data = decompressor.decompress(data_to_decode)
+        decompressor.write_file(file, decoded_data)
+        self.assertEqual(decoded_data, data_from_file)
+        self.assertIsNotNone(data_to_decode)
+        archive.unlink()
