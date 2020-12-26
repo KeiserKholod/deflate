@@ -74,7 +74,8 @@ class HuffmanCodec:
             codes_from_tree[byte] = code
         return codes_from_tree
 
-    def get_code_from_node(self, node: Node, code: tuple = None) -> int:
+    def get_code_from_node(self, node: Node,
+                           code: tuple = None) -> collections.Iterable:
         """Get Code of the node by other nodes."""
 
         if not code:
