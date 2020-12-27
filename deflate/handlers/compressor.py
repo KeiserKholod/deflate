@@ -31,6 +31,9 @@ class Compressor:
     create new archive in File system.
     """
 
+    def __init__(self):
+        self.checksum = ""
+
     def compress(self, data: bytes, filename: str) -> tuple:
         """
         Compress bin data with deflate algorithm.
@@ -42,6 +45,7 @@ class Compressor:
             lz77_codec = LZ77Codec(256)
             huffman_codec = HuffmanCodec()
             checksum = huffman_codec.get_checksum(data)
+            self.checksum = checksum
             codewords = lz77_codec.encode(data)
             codewords_bytes = b''
             for codeword in codewords:

@@ -14,6 +14,7 @@ def compress(path: str, archive_name: str):
                                                          len(encoded_data))
     print(f'Compress ratio: {compress_ratio}%\n'
           f'Time: {time}\n'
+          f'Checksum: {compressor.checksum.hex()}\n'
           f'Archive successfully created')
 
 
