@@ -2,21 +2,21 @@ class DeflateError(Exception):
     message = "Error"
 
 
-class WrongChecksumError(Exception):
+class WrongChecksumError(DeflateError):
     message = 'Wrong chesksum'
 
 
-class CodewordNotInWindowError(Exception):
+class CodewordNotInWindowError(DeflateError):
     message = 'Codeword not in window, file can not be  decompressed'
 
 
-class CodewordOffsetNegativeError(Exception):
+class CodewordOffsetNegativeError(DeflateError):
     message = 'Codeword offset negative, file can not be decompressed'
 
 
-class NotArchiveError(Exception):
+class NotArchiveError(DeflateError):
     message = 'File extension is not .dfa'
 
 
-class BrokenArchiveError(Exception):
+class BrokenArchiveError(DeflateError):
     message = 'Can not decode data'

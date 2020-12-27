@@ -28,7 +28,7 @@ class Decompressor:
 
         archive = Path.cwd() / archive_name
         if archive.suffix != '.dfa' or not archive.exists():
-            raise errors.NotArchiveError()
+            raise errors.NotArchiveError
         return archive.read_bytes()
 
     def decompress(self, data: bytes) -> tuple:
@@ -62,7 +62,7 @@ class Decompressor:
         decoded = lz77_codec.decode(self._get_codewords_from_bytes
                                     (decoded_huffman))
         if huffman_codec.get_checksum(decoded) != checksum:
-            raise errors.WrongChecksumError()
+            raise errors.WrongChecksumError
         return Path(filename), decoded
 
     @staticmethod
