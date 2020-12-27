@@ -4,8 +4,8 @@ import time
 from datetime import datetime
 from pathlib import Path
 from bitarray import bitarray
-from deflate.huffman import HuffmanCodec
-from deflate.lz77 import LZ77Codec
+from deflate.codecs.huffman import HuffmanCodec
+from deflate.codecs.lz77 import LZ77Codec
 
 
 class TimeMeasure:

@@ -1,12 +1,11 @@
 import unittest
 from bitarray import bitarray
-from deflate.huffman import HuffmanCodec, Node
-from deflate.lz77 import LZ77Codec, Codeword
+from deflate.codecs.huffman import HuffmanCodec, Node
+from deflate.codecs.lz77 import LZ77Codec, Codeword
 import tempfile
 from deflate.handlers.compressor import Compressor
 from deflate.handlers.decompressor import Decompressor
 from pathlib import Path
-import os
 
 
 class TestHuffman(unittest.TestCase):

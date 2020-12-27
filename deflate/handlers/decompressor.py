@@ -1,8 +1,8 @@
 import json
 import struct
 from pathlib import Path
-from deflate.huffman import HuffmanCodec
-from deflate.lz77 import LZ77Codec, Codeword
+from deflate.codecs.huffman import HuffmanCodec
+from deflate.codecs.lz77 import LZ77Codec, Codeword
 from deflate import errors
 
 
