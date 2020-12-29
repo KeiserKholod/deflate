@@ -85,7 +85,8 @@ class LZ77Codec:
         return Codeword(longest_match_offset, longest_match_length,
                         self.buffer[position + longest_match_length])
 
-    def get_max_match_len(self, pattern_position: int, matching_position: int) -> int:
+    def get_max_match_len(self, pattern_position: int,
+                          matching_position: int) -> int:
         """Get length of max substring."""
 
         match_length = 0
