@@ -100,7 +100,7 @@ class LZ77Codec:
     def decode(codewords: List[Codeword]) -> bytes:
         """Get decoded bin data by list of codewords."""
 
-        buffer = b''
+        buffer = bytes()
         for codeword in codewords:
             if codeword.offset > len(buffer):
                 raise errors.CodewordNotInWindowError()

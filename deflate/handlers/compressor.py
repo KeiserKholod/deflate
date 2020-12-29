@@ -47,7 +47,7 @@ class Compressor:
             checksum = huffman_codec.get_checksum(data)
             self.checksum = checksum
             codewords = lz77_codec.encode(data)
-            codewords_bytes = b''
+            codewords_bytes = bytes()
             for codeword in codewords:
                 codewords_bytes += bytes([codeword.offset])
                 codewords_bytes += bytes([codeword.length])
